@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="b747a641-ff31-42f4-8f2a-a4d30439a6ae" name="UMLClassDiagram1" linkedPackageId="e2d977f8-ba51-4a1f-9a7e-1fe7eff2a2bf" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="73c5a666-0ea2-40b8-ae6d-2d998c2c2532">
+      <profileInstance Id="c03c3bca-8fc8-45bd-a110-a04b311cc221" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="cd86fc86-8d78-45f6-8044-0ddd0fe923dd">
+      <profileInstance Id="f5cfe16a-1768-4892-aee4-a7e716a0cbcc" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <logicalClassDesignerModelHasPackages>
+      <package Id="694a10c8-eb8c-4a3c-8955-0dc01d129978" name="AM3DOD">
+        <elementDefinition Id="39e435f5-b020-4455-8d26-d4f6e0fa8d64" />
+        <packagedElements>
+          <packageHasNamedElement>
+            <Interface Id="9f66bfba-4594-46ed-bb75-915e635b0f35" name="IMapObjectData" isAbstract="false" isLeaf="false">
+              <elementDefinition Id="ea0ca50d-e23b-4974-80ab-aefe14720949" />
+              <ownedAttributes>
+                <property Id="8f73af87-81b5-4fb3-8f93-9adc8eb54621" name="Project" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="a8cc3ff5-b4a5-42d2-b44a-02701d7cdae3" />
+                </property>
+                <property Id="2efaf6d9-7272-4e39-aa91-90990a6dc191" name="Document" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="f3cc44fb-e462-4898-be94-e4c8f4cc28e1" />
+                </property>
+              </ownedAttributes>
+              <ownedOperations>
+                <operation Id="1439bd42-b730-46a2-8d26-6564481447c3" name="GetDataTableRecords" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="e9aaf15d-ef07-449b-88bc-74ba1763c824" />
+                </operation>
+                <operation Id="1b3ef82c-12dd-4dde-9184-e2bc4e267222" name="GetDataTableRecords" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="806c49d1-7393-4c4a-baa3-d58e19a7e7ec" />
+                </operation>
+                <operation Id="ce0f306c-cdc0-4e74-95cc-ae3aa389e5f5" name="GetDataTableRecords" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="02a0c1d9-2d70-4b2f-a830-e5cbb07eeed9" />
+                </operation>
+                <operation Id="f2e15776-17b4-41e0-a2e0-ec1659be6a08" name="GetDataTableRecords" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="2cdeb9e1-2ea9-4536-815d-1189a9931f86" />
+                </operation>
+                <operation Id="91da10ca-d33b-4e0d-bfc8-6234afdfd17b" name="GetDataTableNames" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="d4938d11-162d-44c5-b569-e9a009ac46e9" />
+                </operation>
+                <operation Id="178353d4-2a18-4e7f-8a2e-585afb77489e" name="GetDataTables" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="89b2d873-b5a6-4f9d-986f-30ed55163150" />
+                </operation>
+                <operation Id="e088c667-65cf-4d22-909a-a54159ff8228" name="CreateTable" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="3ab25601-757e-49fb-bb80-c84b22606017" />
+                </operation>
+                <operation Id="21bf57ac-fff3-4df4-b7d7-486bb2374464" name="DeleteTable" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="ed5f1e33-4032-4b1e-881d-1a0a84958495" />
+                </operation>
+                <operation Id="560c78f5-aa87-4210-adb6-e9d952008cdd" name="RenameTable" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="0bed90f0-32dc-40dc-82c0-b97b93b83eb7" />
+                </operation>
+                <operation Id="d45b24a5-6acf-41ce-a077-e6a618c84278" name="TableExists" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="6d832496-8de9-46a8-9fc1-f6980bcd7bf6" />
+                </operation>
+                <operation Id="9d36dd87-b4c8-474b-b35a-0844d471ee90" name="CreateRecords" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="dc270b09-c9cd-463a-ae69-801514028624" />
+                </operation>
+                <operation Id="7f884cf8-6cf8-4625-ab2f-3a81b253e2c2" name="DeleteRecords" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="46e8b396-fe87-4fb6-8bf8-e90ae9369576" />
+                </operation>
+                <operation Id="e3eb1c64-af62-4fe8-99cd-6a7beeba98cb" name="UpdateRecords" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="4ca2ed7c-0a8c-4683-a74a-5e7b74c83909" />
+                </operation>
+              </ownedOperations>
+            </Interface>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="bea3a0dd-866b-485e-92fd-1a87cc22d5b4" name="ODTable" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="64be81fb-1457-45ad-8e5f-80ed7f588a18" />
+              <ownedAttributesInternal>
+                <property Id="a8872149-6ca1-48f8-8d8e-cba468f52499" name="Name" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="622aab06-b3b2-4792-a4f3-3421b1f147b3" />
+                </property>
+                <property Id="6cff7c39-c1f7-485f-ab39-90e8c4952d43" name="FieldDefinitions" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="784b370a-f9e5-400e-a25f-ebdde6bda8d0" />
+                </property>
+                <property Id="403b66fc-3de8-4590-8eb8-d5cb8cc5fa45" name="Description" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="95f4ecda-53b2-42dd-804e-d9d2d8f0aebf" />
+                </property>
+              </ownedAttributesInternal>
+              <ownedOperationsInternal>
+                <operation Id="afd57af1-6c5a-4294-9c36-cb7ddc13916d" name="ODTable" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="57e27930-42ce-4a06-a9cf-669945e85ea2" />
+                </operation>
+              </ownedOperationsInternal>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="e817f4d5-6dee-4476-a77c-6858a56e1276" name="ODFieldDefinition" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="71e4910e-74d1-458a-bf45-c0b21cf58e5b" />
+              <ownedAttributesInternal>
+                <property Id="122a6b6b-09b6-4f66-b71a-6e5cc664b08a" name="Name" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="6843fb52-5b92-4b9d-b5d3-ed2743503f88" />
+                </property>
+                <property Id="86582785-e244-4d69-9b9c-ee65d0aae5f2" name="DataType" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="dba500ab-0fd5-417c-b9e9-683d399205ae" />
+                </property>
+                <property Id="fdc666c6-123c-4876-926d-8108c6d329e7" name="Description" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="c00c075b-94a5-4660-a3c9-6390845b918c" />
+                </property>
+              </ownedAttributesInternal>
+              <ownedOperationsInternal>
+                <operation Id="afdd1dd5-6292-4de5-a1a6-addc07cc5fd5" name="ODFieldDefinition" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="fd9b1656-19df-4aca-b667-dddb2d5b2ff7" />
+                </operation>
+              </ownedOperationsInternal>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="f8a733c1-dbd4-4ce9-a91a-e7162fb50dd1" name="ODRecord" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="c132994a-a023-444b-9bef-3e7330f03851" />
+              <ownedAttributesInternal>
+                <property Id="cde81a3d-8c42-48cd-8f7f-aa781834a727" name="DBObject" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="ac669bd5-f44b-4b79-8e5d-6a9b709b6055" />
+                </property>
+                <property Id="df3a25ab-6e8a-4a58-9890-2caafcde4d6d" name="ODTable" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="e3649ac9-ab2c-4295-9f3a-1efd2faa5222" />
+                </property>
+                <property Id="b2707117-66c9-440c-82ba-bfed153525a7" name="Values" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="ac7afd78-041e-421d-8c90-9d70a88ad00c" />
+                </property>
+              </ownedAttributesInternal>
+              <ownedOperationsInternal>
+                <operation Id="c76b5fbb-e94d-423e-9776-074865d4827d" name="ODRecord" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="d1a7db54-e7fb-45c6-a578-264c549e121b" />
+                </operation>
+              </ownedOperationsInternal>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="f05478f0-fd36-488b-a795-299107abb349" name="MapObjectData" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="e9f173bd-62f8-4dce-b11f-159a8543b991" />
+              <ownedAttributesInternal>
+                <property Id="97a6589e-2206-426a-b2fa-248d520e2166" name="Project" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="a2f01f43-5070-4d71-b5f4-6bb9256558a3" />
+                </property>
+                <property Id="54772cfb-15af-41ef-9816-f554c21c0415" name="Document" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="543bd02a-059e-409b-944d-84e3c6f8b754" />
+                </property>
+              </ownedAttributesInternal>
+              <ownedOperationsInternal>
+                <operation Id="b5528082-9f15-4bd2-9239-7f1466ab8257" name="MapObjectData" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="274562d1-a82d-45c6-8b1b-6598bf711f54" />
+                </operation>
+                <operation Id="efcd2741-db86-4b08-af12-1c33d5117430" name="GetDataTableNames" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="94cb4f66-90b2-4fb1-a8b2-120c42d9bde3" />
+                </operation>
+                <operation Id="14d13a81-aaf2-47c7-afa6-2476c943b3ee" name="GetDataTables" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="bf9f3d94-fb9a-4caf-b0ec-10dc5eae384e" />
+                </operation>
+                <operation Id="95ddae97-9fbc-4e67-b257-b71322c73f92" name="CreateTable" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="e9a6eb2d-dc83-4d93-a2d4-04a144eea239" />
+                </operation>
+                <operation Id="e7b75118-cc5d-4cd1-b0ba-497e8ebf7a34" name="DeleteTable" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="1d7a64f6-a694-4f32-b782-9ec501c9ede7" />
+                </operation>
+                <operation Id="3d8e7d9b-3c55-4131-a047-055853eac9c5" name="RenameTable" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="68947f96-ec1c-4685-af06-762490409a52" />
+                </operation>
+                <operation Id="f9aeda25-36bf-4afb-ba14-087255504d36" name="TableExists" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="19a69dd3-a88c-4e3f-9650-025c73b6d29f" />
+                </operation>
+                <operation Id="a466a7ba-13f3-4278-8e48-f09335d6e615" name="GetDataTableRecords" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="386d5dea-e257-4af0-a0c0-3b7edaa60c08" />
+                </operation>
+                <operation Id="755f9f85-2591-422b-8ebe-8f07c67a8b41" name="GetDataTableRecords" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="0be14e92-bcf4-40b0-bebf-a2a7d04a7e00" />
+                </operation>
+                <operation Id="4412d705-66a2-46a1-90d5-f0ff5fa23cf2" name="GetDataTableRecords" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="309593b6-b206-4ef0-973e-f3166140778a" />
+                </operation>
+                <operation Id="efb36b2b-3bc8-4be3-a26c-01316dadd666" name="GetDataTableRecords" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="6f634e4d-d191-4467-8dc0-9df14287ad5c" />
+                </operation>
+                <operation Id="854644ad-797f-413b-bc5d-9c8399e6b7a2" name="CreateRecords" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="8631a267-a42c-4901-b07b-23d4523facfe" />
+                </operation>
+                <operation Id="14406592-819c-45d0-8d9f-0a0d5290ba27" name="DeleteRecords" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="cff72f17-d17a-475f-910f-fa97a5e46322" />
+                </operation>
+                <operation Id="3497470f-975a-49df-8de1-eb59167059ae" name="UpdateRecords" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="3dc5d058-bf02-4aab-b2a3-4c18d576e8a4" />
+                </operation>
+              </ownedOperationsInternal>
+            </class>
+          </packageHasNamedElement>
+        </packagedElements>
+      </package>
+    </logicalClassDesignerModelHasPackages>
+  </packagedElements>
+  <package Id="e2d977f8-ba51-4a1f-9a7e-1fe7eff2a2bf" name="ModelingProject1">
+    <elementDefinition Id="f3eb637b-1601-41b0-8e3f-b5f5e3742e53" />
+  </package>
+</logicalClassDesignerModel>
