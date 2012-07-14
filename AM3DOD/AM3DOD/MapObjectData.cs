@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Autodesk.Gis.Map.Project;
 using Autodesk.Gis.Map.ObjectData;
 using Autodesk.AutoCAD.ApplicationServices;
@@ -23,23 +21,23 @@ namespace AM3DOD
         /// <summary>
         /// Private variable storing a Gis Map Document.
         /// </summary>
-        private Document document;
+        private readonly Document _document;
         public Document Document
         {
             get
             {
-                return document;
+                return _document;
             }
         }
         /// <summary>
         /// Private variable storing a Gis Map ProjectModel.
         /// </summary>
-        private ProjectModel project;
+        private readonly ProjectModel _project;
         public ProjectModel Project
         {
             get
             {
-                return project;
+                return _project;
             }
         }
         #endregion
@@ -47,10 +45,10 @@ namespace AM3DOD
         #region Constructor
         public MapObjectData(ProjectModel project)
         {
-            this.project = project;
+            _project = project;
 
             DocumentCollection acDocMgr = Application.DocumentManager;
-            document = acDocMgr.GetDocument(project.Database);
+            _document = acDocMgr.GetDocument(project.Database);
         }
         #endregion
 
@@ -59,66 +57,50 @@ namespace AM3DOD
         {
             List<string> list = new List<string>();
 
-            try
+            //Run through all object data table names
+            foreach (string s in _project.ODTables.GetTableNames())
             {
-                //Run through all object data table names
-                foreach (string s in project.ODTables.GetTableNames())
-                {
-                    //Add the tablename to the list
-                    list.Add(s);
-                }
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
+                //Add the tablename to the list
+                list.Add(s);
             }
 
             return list;
         }
 
-        public List<ODTable> GetDataTables()
+        public List<OdTable> GetDataTables()
         {
             //Declaration of list to store all mapped ODTables in
-            List<ODTable> tables = new List<ODTable>();
+            List<OdTable> tables = new List<OdTable>();
             //Declaration of a list to store all TableNames in
-            List<string> names = new List<string>();
             //Get the Data Table Names and store them in the list of Object Table Names
-            names = GetDataTableNames();
+            List<string> names = GetDataTableNames();
 
-            try
+            //Although you should never get a null value fromGetDataTableNames we first makes
+            //sure the map actually has tables created before we continue mapping
+            if (names != null)
             {
-                //Although you should never get a null value fromGetDataTableNames we first makes
-                //sure the map actually has tables created before we continue mapping
-                if (names != null)
+                //Foreach datatable found in the Maps list of Object Data Tables, map Table Info and Fielddefinition info
+                for (int i = 0; i < names.Count; i++)
                 {
-                    //Foreach datatable found in the Maps list of Object Data Tables, map Table Info and Fielddefinition info
-                    for (int i = 0; i < names.Count; i++)
+                    //Declare and instantiate a new instance of a List containing FielDefinitions
+                    List<OdFieldDefinition> fieldDefinitions = new List<OdFieldDefinition>();
+                    //Foreach fielddefinition in the table we add a new instance of Fielddefinition containing all info
+                    //of the fielddefinition
+                    for (int j = 0; j < _project.ODTables[names[i]].FieldDefinitions.Count; j++)
                     {
-                        //Declare and instantiate a new instance of a List containing FielDefinitions
-                        List<ODFieldDefinition> fieldDefinitions = new List<ODFieldDefinition>();
-                        //Foreach fielddefinition in the table we add a new instance of Fielddefinition containing all info
-                        //of the fielddefinition
-                        for (int j = 0; j < project.ODTables[names[i]].FieldDefinitions.Count; j++)
-                        {
-                            fieldDefinitions.Add(new ODFieldDefinition(project.ODTables[names[i]].FieldDefinitions[j].Name,
-                                project.ODTables[names[i]].FieldDefinitions[j].Description,
-                                 project.ODTables[names[i]].FieldDefinitions[j].Type));
-                        }
-                        //Once all fielddefinitions are defined we add the table to our List of ODTables
-                        tables.Add(new ODTable(project.ODTables[names[i]].Name, project.ODTables[names[i]].Description, fieldDefinitions));
+                        fieldDefinitions.Add(new OdFieldDefinition(_project.ODTables[names[i]].FieldDefinitions[j].Name,
+                                                                   _project.ODTables[names[i]].FieldDefinitions[j].Description,
+                                                                   _project.ODTables[names[i]].FieldDefinitions[j].Type));
                     }
+                    //Once all fielddefinitions are defined we add the table to our List of ODTables
+                    tables.Add(new OdTable(_project.ODTables[names[i]].Name, _project.ODTables[names[i]].Description, fieldDefinitions));
                 }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
             }
 
             return tables;
         }
 
-        public int CreateTable(ODTable table)
+        public int CreateTable(OdTable table)
         {
             if (table == null)
                 throw new ArgumentNullException();
@@ -127,49 +109,39 @@ namespace AM3DOD
             if (!TableExists(table))
             {
                 //Declaration. ObjectData.FieldDefinitions Object
-                Autodesk.Gis.Map.ObjectData.FieldDefinitions fd;
-                try
+                FieldDefinitions fd;
+                //Apply a document lock before you make any changes to the Object Data Tables
+                using (_document.LockDocument())
                 {
-                    //Apply a document lock before you make any changes to the Object Data Tables
-                    using (DocumentLock docLock = document.LockDocument())
+                    //Run your code inside a transaction
+                    using (Transaction tr = _project.Database.TransactionManager.StartTransaction())
                     {
-                        //Run your code inside a transaction
-                        using (Transaction tr = project.Database.TransactionManager.StartTransaction())
+                        //Instantiation of an ObjectData.FieldDefinitions object
+                        fd = _project.MapUtility.NewODFieldDefinitions();
+
+                        for (int i = 0; i < table.FieldDefinitions.Count; i++)
                         {
-                            //Instantiation of an ObjectData.FieldDefinitions object
-                            fd = project.MapUtility.NewODFieldDefinitions();
-
-                            for (int i = 0; i < table.FieldDefinitions.Count; i++)
-                            {
-                                //Add one fielddefinition to the fieldefinitions object
-                                fd.Add(table.FieldDefinitions[i].Name, table.FieldDefinitions[i].Description, table.FieldDefinitions[i].DataType, i);
-                                //Check what the default mapvalue is, I added this out of curiousity
-                                MapValue value = fd[i].DefaultMapValue;
-                            }
-
-                            Autodesk.Gis.Map.ObjectData.Tables tables = project.ODTables;
-                            //Add the new table to the project OD Tables. I have no idea what the IsXDataRecord does!!
-                            tables.Add(table.Name, fd, table.Description, true);
-                            //Commit your changes you made to the map Tables
-                            tr.Commit();
-
-                            //Check wheter the addition of the table was successfull
-                            if (TableExists(table))
-                                return 1;
-                            else
-                                return -1;
+                            //Add one fielddefinition to the fieldefinitions object
+                            fd.Add(table.FieldDefinitions[i].Name, table.FieldDefinitions[i].Description, table.FieldDefinitions[i].DataType, i);
                         }
+
+                        Tables tables = _project.ODTables;
+                        //Add the new table to the project OD Tables. I have no idea what the IsXDataRecord does!!
+                        tables.Add(table.Name, fd, table.Description, true);
+                        //Commit your changes you made to the map Tables
+                        tr.Commit();
+
+                        //Check wheter the addition of the table was successfull
+                        if (TableExists(table))
+                            return 1;
+                        return -1;
                     }
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
                 }
             }
             return 0;
         }
 
-        public int DeleteTable(ODTable table)
+        public int DeleteTable(OdTable table)
         {
             if (table == null)
                 throw new ArgumentNullException();
@@ -177,38 +149,30 @@ namespace AM3DOD
             //Check if the table exists
             if (TableExists(table))
             {
-                try
+                //Lock your Map document before executing the deletion
+                using (_document.LockDocument())
                 {
-                    //Lock your Map document before executing the deletion
-                    using (DocumentLock docLock = document.LockDocument())
+                    //Run everything inside a transaction
+                    using (Transaction tr = _project.Database.TransactionManager.StartTransaction())
                     {
-                        //Run everything inside a transaction
-                        using (Transaction tr = project.Database.TransactionManager.StartTransaction())
-                        {
-                            //2. Remove the table if it exists
-                            project.ODTables.RemoveTable(table.Name);
-                            //Commit your changes made to the Object Data Tables
-                            tr.Commit();
+                        //2. Remove the table if it exists
+                        _project.ODTables.RemoveTable(table.Name);
+                        //Commit your changes made to the Object Data Tables
+                        tr.Commit();
 
-                            //Check wheter deleting the table was successfull
-                            if (!TableExists(table))
-                            {
-                                return 1;
-                            }
-                            else
-                                return -1;
+                        //Check wheter deleting the table was successfull
+                        if (!TableExists(table))
+                        {
+                            return 1;
                         }
+                        return -1;
                     }
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
                 }
             }
             return 0;
         }
 
-        public int RenameTable(ODTable table, ODTable newTable)
+        public int RenameTable(OdTable table, OdTable newTable)
         {
             if (table == null)
                 throw new ArgumentNullException();
@@ -216,41 +180,33 @@ namespace AM3DOD
             //Check if the table exists
             if (TableExists(table))
             {
-                try
+                //Lock your Map document before executing the deletion
+                using (_document.LockDocument())
                 {
-                    //Lock your Map document before executing the deletion
-                    using (DocumentLock docLock = document.LockDocument())
+                    //Run everything inside a transaction
+                    using (Transaction tr = _project.Database.TransactionManager.StartTransaction())
                     {
-                        //Run everything inside a transaction
-                        using (Transaction tr = project.Database.TransactionManager.StartTransaction())
-                        {
-                            //2. Rename the table if it exists
-                            project.ODTables.RenameTable(table.Name, newTable.Name);
-                            //Commit your changes made to the Object Data Tables
-                            tr.Commit();
+                        //2. Rename the table if it exists
+                        _project.ODTables.RenameTable(table.Name, newTable.Name);
+                        //Commit your changes made to the Object Data Tables
+                        tr.Commit();
 
-                            //Check if renaming was succefull
-                            if (TableExists(newTable))
-                                return 1;
-                            else
-                                return -1;
-                        }
+                        //Check if renaming was succefull
+                        if (TableExists(newTable))
+                            return 1;
+                        return -1;
                     }
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
                 }
             }
             return 0;
         }
 
-        public bool TableExists(ODTable table)
+        public bool TableExists(OdTable table)
         {
             if (table == null)
                 throw new ArgumentNullException();
 
-            bool exists = false;
+            const bool exists = false;
             //Get all Object Table Names
             List<string> l = GetDataTableNames();
 
@@ -267,52 +223,52 @@ namespace AM3DOD
         #endregion
 
         #region Record Specific Methods
-        public List<Autodesk.Gis.Map.ObjectData.Record> GetDataTableRecords(List<Autodesk.AutoCAD.DatabaseServices.DBObject> acadObjects, Autodesk.Gis.Map.ObjectData.Table oDTable)
+        public List<Record> GetDataTableRecords(List<DBObject> acadObjects, Autodesk.Gis.Map.ObjectData.Table oDTable)
         {
             throw new NotImplementedException();
         }
 
-        public List<Autodesk.Gis.Map.ObjectData.Record> GetDataTableRecords(List<Autodesk.AutoCAD.DatabaseServices.DBObject> acadObjects)
+        public List<Record> GetDataTableRecords(List<DBObject> acadObjects)
         {
             throw new NotImplementedException();
         }
 
-        public List<Autodesk.Gis.Map.ObjectData.Record> GetDataTableRecords(Autodesk.AutoCAD.DatabaseServices.DBObject acadObject, Autodesk.Gis.Map.ObjectData.Table oDTable)
+        public List<Record> GetDataTableRecords(DBObject acadObject, Autodesk.Gis.Map.ObjectData.Table oDTable)
         {
             throw new NotImplementedException();
         }
 
-        public List<Autodesk.Gis.Map.ObjectData.Record> GetDataTableRecords(Autodesk.AutoCAD.DatabaseServices.DBObject acadObject)
+        public List<Record> GetDataTableRecords(DBObject acadObject)
         {
             throw new NotImplementedException();
         }
 
-        public void CreateRecords(List<ODRecord> ODRecords, ODTable ODTable)
+        public void CreateRecords(List<OdRecord> odRecords, OdTable odTable)
         {
-            if (ODRecords == null)
+            if (odRecords == null)
                 throw new ArgumentNullException();
-            if (ODTable == null)
+            if (odTable == null)
                 throw new ArgumentNullException();
 
             //Create a reference to the corresponding ODTable of the Map project
-            Autodesk.Gis.Map.ObjectData.Table table = project.ODTables[ODTable.Name];
+            Autodesk.Gis.Map.ObjectData.Table table = _project.ODTables[odTable.Name];
 
             //Lock your document
-            using (DocumentLock docLock = document.LockDocument())
+            using (_document.LockDocument())
             {
                 //Execute everything inside a transaction
-                using (Transaction tr = project.Database.TransactionManager.StartTransaction())
+                using (Transaction tr = _project.Database.TransactionManager.StartTransaction())
                 {
-                    try
+                    //We need to reassign our BlockTable and BlockTableRecord so we can call our objects from the database.
+                    BlockTable bt = tr.GetObject(_project.Database.BlockTableId, OpenMode.ForRead) as BlockTable;
+                    if (bt != null)
                     {
-                        //We need to reassign our BlockTable and BlockTableRecord so we can call our objects from the database.
-                        BlockTable bt = tr.GetObject(project.Database.BlockTableId, OpenMode.ForRead) as BlockTable;
                         BlockTableRecord modal = tr.GetObject(bt[BlockTableRecord.ModelSpace], OpenMode.ForRead) as BlockTableRecord;
 
-                        foreach (ODRecord record in ODRecords)
+                        foreach (OdRecord record in odRecords)
                         {
                             //Create an empty record using the static method ObjectData.Record.Create(). This does not define any fields for the record.
-                            using (Autodesk.Gis.Map.ObjectData.Record rec = Autodesk.Gis.Map.ObjectData.Record.Create())
+                            using (Record rec = Record.Create())
                             {
                                 //Initialize a new record inside the project Object Data Table
                                 table.InitRecord(rec);
@@ -323,30 +279,27 @@ namespace AM3DOD
                                 for (int i = 0; i < record.Values.Count; i++)
                                 {
                                     //Set a reference to a cell inside the record
-                                    Autodesk.Gis.Map.Utilities.MapValue val = rec[i];
+                                    MapValue val = rec[i];
                                     val.Assign(record.Values[i]);
                                 }
 
                                 //Foreach item in our modelspace we will add a new record
-                                foreach (ObjectId item in modal)
-                                {
-                                    //If the Handle of an item in modelspace equals the handle of our AcadObject from the businesslayer
-                                    if (item.Handle.Value == record.DBObject.Handle.Value)
+                                if (modal != null)
+                                    foreach (ObjectId item in modal)
                                     {
-                                        //Get a new reference to the actual database object
-                                        DBObject obj = tr.GetObject(item, OpenMode.ForRead) as DBObject;
-                                        //Add the mapped record to the Map Project's specific Object DataTable
-                                        table.AddRecord(rec, obj.ObjectId);
-                                        //jump out loop if object is found in modal and dealt with
-                                        break;
+                                        //If the Handle of an item in modelspace equals the handle of our AcadObject from the businesslayer
+                                        if (item.Handle.Value == record.DbObject.Handle.Value)
+                                        {
+                                            //Get a new reference to the actual database object
+                                            DBObject obj = tr.GetObject(item, OpenMode.ForRead);
+                                            //Add the mapped record to the Map Project's specific Object DataTable
+                                            table.AddRecord(rec, obj.ObjectId);
+                                            //jump out loop if object is found in modal and dealt with
+                                            break;
+                                        }
                                     }
-                                }
                             }
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        throw ex;
                     }
                     //If all went well, commit the changes made to the project Object DataTables
                     tr.Commit();
@@ -354,9 +307,9 @@ namespace AM3DOD
             }
         }
 
-        public void DeleteRecords(List<ODRecord> ODRecords, ODTable oDTable)
+        public void DeleteRecords(List<OdRecord> odRecords, OdTable oDTable)
         {
-            if (ODRecords == null)
+            if (odRecords == null)
                 throw new ArgumentNullException();
             if (oDTable == null)
                 throw new ArgumentNullException();
@@ -364,47 +317,44 @@ namespace AM3DOD
             //Check if the oDTable Exists
             if (TableExists(oDTable))
             {
-                Autodesk.Gis.Map.ObjectData.Table table = project.ODTables[oDTable.Name];
+                Autodesk.Gis.Map.ObjectData.Table table = _project.ODTables[oDTable.Name];
 
                 //Use a document lock on your Map drawing
-                using (DocumentLock docLock = document.LockDocument())
+                using (_document.LockDocument())
                 {
                     //Run everything inside a transaction
-                    using (Transaction tr = project.Database.TransactionManager.StartTransaction())
+                    using (Transaction tr = _project.Database.TransactionManager.StartTransaction())
                     {
-                        try
+                        BlockTable bt = tr.GetObject(_project.Database.BlockTableId, OpenMode.ForRead) as BlockTable;
+                        if (bt != null)
                         {
-                            BlockTable bt = tr.GetObject(project.Database.BlockTableId, OpenMode.ForRead) as BlockTable;
                             BlockTableRecord modal = tr.GetObject(bt[BlockTableRecord.ModelSpace], OpenMode.ForRead) as BlockTableRecord;
 
-                            foreach (ODRecord record in ODRecords)
+                            foreach (OdRecord record in odRecords)
                             {
-                                foreach (ObjectId item in modal)
-                                {
-                                    if (item.Handle.Value == record.DBObject.Handle.Value)
+                                if (modal != null)
+                                    foreach (ObjectId item in modal)
                                     {
-                                        using (Autodesk.Gis.Map.ObjectData.Records recs = table.GetObjectTableRecords(0, item, Autodesk.Gis.Map.Constants.OpenMode.OpenForWrite, true))
+                                        if (item.Handle.Value == record.DbObject.Handle.Value)
                                         {
-                                            //Makes sure you only delete the records in the list and not all records attached to the object
-                                            //Will loop through all records and delete them
-                                            IEnumerator ie = recs.GetEnumerator();
-                                            ie.MoveNext();
-                                            //Make sure the record in the records == the ODRecord in the list
-                                            if (recs.CurrentObjectId.Handle.Value == record.DBObject.Handle.Value)
+                                            using (Records recs = table.GetObjectTableRecords(0, item, Autodesk.Gis.Map.Constants.OpenMode.OpenForWrite, true))
                                             {
-                                                //remove the record from the table.
-                                                recs.RemoveRecord();
+                                                //Makes sure you only delete the records in the list and not all records attached to the object
+                                                //Will loop through all records and delete them
+                                                IEnumerator ie = recs.GetEnumerator();
+                                                ie.MoveNext();
+                                                //Make sure the record in the records == the ODRecord in the list
+                                                if (recs.CurrentObjectId.Handle.Value == record.DbObject.Handle.Value)
+                                                {
+                                                    //remove the record from the table.
+                                                    recs.RemoveRecord();
+                                                }
                                             }
+                                            //jump out loop if object is found in modal and dealt with
+                                            break;
                                         }
-                                        //jump out loop if object is found in modal and dealt with
-                                        break;
                                     }
-                                }
                             }
-                        }
-                        catch (Exception ex)
-                        {
-                            throw ex;
                         }
                         //Commit the changes made to the table
                         tr.Commit();
@@ -413,9 +363,9 @@ namespace AM3DOD
             }
         }
 
-        public void UpdateRecords(List<ODRecord> ODRecords, ODTable oDTable)
+        public void UpdateRecords(List<OdRecord> odRecords, OdTable oDTable)
         {
-            if (ODRecords == null)
+            if (odRecords == null)
                 throw new ArgumentNullException();
             if (oDTable == null)
                 throw new ArgumentNullException();
@@ -423,55 +373,52 @@ namespace AM3DOD
             //Check if the oDTable Exists
             if (TableExists(oDTable))
             {
-                Autodesk.Gis.Map.ObjectData.Table table = project.ODTables[oDTable.Name];
+                Autodesk.Gis.Map.ObjectData.Table table = _project.ODTables[oDTable.Name];
 
                 //Use a document lock on your Map drawing
-                using (DocumentLock docLock = document.LockDocument())
+                using (_document.LockDocument())
                 {
                     //Run everything inside a transaction
-                    using (Transaction tr = project.Database.TransactionManager.StartTransaction())
+                    using (Transaction tr = _project.Database.TransactionManager.StartTransaction())
                     {
-                        try
+                        BlockTable bt = tr.GetObject(_project.Database.BlockTableId, OpenMode.ForRead) as BlockTable;
+                        if (bt != null)
                         {
-                            BlockTable bt = tr.GetObject(project.Database.BlockTableId, OpenMode.ForRead) as BlockTable;
                             BlockTableRecord modal = tr.GetObject(bt[BlockTableRecord.ModelSpace], OpenMode.ForRead) as BlockTableRecord;
 
-                            foreach (ODRecord record in ODRecords)
+                            foreach (OdRecord record in odRecords)
                             {
-                                foreach (ObjectId item in modal)
-                                {
-                                    if (item.Handle.Value == record.DBObject.Handle.Value)
+                                if (modal != null)
+                                    foreach (ObjectId item in modal)
                                     {
-                                        using (Autodesk.Gis.Map.ObjectData.Records recs = table.GetObjectTableRecords(0, item, Autodesk.Gis.Map.Constants.OpenMode.OpenForWrite, true))
+                                        if (item.Handle.Value == record.DbObject.Handle.Value)
                                         {
-                                            foreach (Record rec in recs)
+                                            using (Records recs = table.GetObjectTableRecords(0, item, Autodesk.Gis.Map.Constants.OpenMode.OpenForWrite, true))
                                             {
-                                                if (rec.MapObjectId.ObjectHandle.Value == record.DBObject.Handle.Value)
+                                                foreach (Record rec in recs)
                                                 {
-                                                    //Foreach object inside the List of Values of the record object
-                                                    //I will have to make sure the Values amount equals the columns defined within the table
-                                                    //Before continueing and performing any actions
-                                                    for (int i = 0; i < record.Values.Count; i++)
+                                                    if (rec.MapObjectId.ObjectHandle.Value == record.DbObject.Handle.Value)
                                                     {
-                                                        //Set a reference to a cell inside the record
-                                                        Autodesk.Gis.Map.Utilities.MapValue val = rec[i];
-                                                        //Assign a new value to the record
-                                                        val.Assign(record.Values[i]);
-                                                        recs.UpdateRecord(rec);
+                                                        //Foreach object inside the List of Values of the record object
+                                                        //I will have to make sure the Values amount equals the columns defined within the table
+                                                        //Before continueing and performing any actions
+                                                        for (int i = 0; i < record.Values.Count; i++)
+                                                        {
+                                                            //Set a reference to a cell inside the record
+                                                            MapValue val = rec[i];
+                                                            //Assign a new value to the record
+                                                            val.Assign(record.Values[i]);
+                                                            recs.UpdateRecord(rec);
+                                                        }
                                                     }
                                                 }
                                             }
+                                            //jump out loop if object is found in modal and dealt with
+                                            break;
                                         }
-                                        //jump out loop if object is found in modal and dealt with
-                                        break;
                                     }
-                                }
                             }
                         }
-                        catch (Exception ex)
-                        {
-                            throw ex;
-                        }                  
                     }
                 }
             }

@@ -8,27 +8,6 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="AM3DOD.ODFieldDefinition">
-    <Position X="0.5" Y="5" Width="1.75" />
-    <TypeIdentifier>
-      <HashCode>AAAAAgAAAAIgAAAAIAAAAAQAAAAEAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ODFieldDefinition.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="AM3DOD.ODRecord">
-    <Position X="4.25" Y="5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>CAAAAAAAAAAAAAAAAAAAAAAAAAAIACAAAAAgIAgAAAA=</HashCode>
-      <FileName>ODRecord.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="AM3DOD.ODTable">
-    <Position X="2.5" Y="5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAgAAAAIAAAAEQAAABEAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ODTable.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Interface Name="AM3DOD.IMapObjectData">
     <Position X="0.5" Y="0.5" Width="2.5" />
     <TypeIdentifier>

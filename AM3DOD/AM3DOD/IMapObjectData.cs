@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Autodesk.Gis.Map.ObjectData;
 using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.Gis.Map.Project;
@@ -55,47 +52,51 @@ namespace AM3DOD
         /// Get the ODTables of the map
         /// </summary>
         /// <returns>A list of ODTables</returns>
-        List<ODTable> GetDataTables();
+        List<OdTable> GetDataTables();
         /// Create a Object Data Table within our Map
-        /// </summary>
         /// <param name="table">Information about the new Table</param>
         /// <returns>A value indicating if the table got created succesfully.A -1 value equals an unsuccessfull creation.</returns>
-        int CreateTable(ODTable table);
+        int CreateTable(OdTable table);
         /// <summary>
         /// Delete a Object Data Table within our Map
         /// </summary>
         /// <param name="table">Information about the Table to be deleted</param>
         /// <returns>A value indicating if the table got deleted succesfully. A -1 value equals an unsuccessfull removal of the Table</returns>
-        int DeleteTable(ODTable table);
+        int DeleteTable(OdTable table);
+
         /// <summary>
         /// Rename an ODTable in the Map
         /// </summary>
         /// <param name="table">ODTable to be renamed</param>
+        /// <param name="newTable"></param>
         /// <returns>-1 if renaming failed . 0 Table doesn't exixt. 1 on a successfull rename</returns>
-        int RenameTable(ODTable table, ODTable newTable);
+        int RenameTable(OdTable table, OdTable newTable);
         /// <summary>
         /// Check wheter the table exists inside Map
         /// </summary>
         /// <param name="table">The ODTable we want to check for its existance</param>
         /// <returns>True if the table exists</returns>
-        bool TableExists(ODTable table);
+        bool TableExists(OdTable table);
+
         /// <summary>
         /// Create records within an ODTable in our Map
         /// </summary>
-        /// <param name="ODRecords">A list of ODRecords to be added to the ODTable</param>
-        /// <param name="ODTable">The ODTable to create records on</param>
-        void CreateRecords(List<ODRecord> ODRecords, ODTable table);
+        /// <param name="odRecords">A list of ODRecords to be added to the ODTable</param>
+        /// <param name="table"></param>
+        void CreateRecords(List<OdRecord> odRecords, OdTable table);
+
         /// <summary>
         /// Delete records within an ODTable in our Map
         /// </summary>
-        /// <param name="ODRecords">A list of ODRecords to be removed from the ODTable</param>
-        /// <param name="oDTable">The ODTable to delete records on</param>
-        void DeleteRecords(List<ODRecord> ODRecords, ODTable table);
+        /// <param name="odRecords">A list of ODRecords to be removed from the ODTable</param>
+        /// <param name="table"></param>
+        void DeleteRecords(List<OdRecord> odRecords, OdTable table);
+
         /// <summary>
         /// Update records within an ODTable in our Map
         /// </summary>
-        /// <param name="ODRecords">A list of ODRecords to be inserted in the ODTable</param>
-        /// <param name="oDTable">The ODTable to update records on</param>
-        void UpdateRecords(List<ODRecord> ODRecords, ODTable table);
+        /// <param name="odRecords">A list of ODRecords to be inserted in the ODTable</param>
+        /// <param name="table"></param>
+        void UpdateRecords(List<OdRecord> odRecords, OdTable table);
     }
 }

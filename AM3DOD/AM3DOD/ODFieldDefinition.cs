@@ -1,57 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Autodesk.Gis.Map.Constants;
 
 namespace AM3DOD
 {
-    public class ODFieldDefinition
+    public class OdFieldDefinition
     {
-        private string name;
-        public string Name 
-        { 
-            get
-            {
-                return name;
-            }
-            private set
-            {
-                name  = value;
-            }
-        }
-        private string description;
-        public string Description 
-        {  
-            get
-            {
-                return description;
-            }
-            private set
-            {
-                description  = value;
-            } 
-        }
-        private Autodesk.Gis.Map.Constants.DataType dataType;
-        public Autodesk.Gis.Map.Constants.DataType DataType 
-        {
-            get
-            {
-                return dataType;
-            }
-            private set
-            {
-                dataType  = value;
-            }  
-        }
+        public string Name { get; private set; }
 
-        public ODFieldDefinition(string name, string description, Autodesk.Gis.Map.Constants.DataType dataType)
+        public string Description { get; private set; }
+
+        public DataType DataType { get; private set; }
+
+        public OdFieldDefinition(string name, string description, DataType dataType)
         {
             if (String.IsNullOrEmpty(name))
-                throw new ArgumentNullException("Name of FieldDefinition can't be null or empty");
+                throw new ArgumentNullException("name");
 
-            this.name = name;
-            this.description = description;
-            this.dataType = dataType;
+            Name = name;
+            Description = description;
+            DataType = dataType;
         }
     }
 }

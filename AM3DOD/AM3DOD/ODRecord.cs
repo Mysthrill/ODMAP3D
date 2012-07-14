@@ -1,61 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Autodesk.AutoCAD.DatabaseServices;
+using Autodesk.Gis.Map.Utilities;
 
 namespace AM3DOD
 {
-    public class ODRecord
+    public class OdRecord
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        private DBObject dBObject;
-        public DBObject DBObject
-        {
-            get
-            {
-                return dBObject;
-            }
-            private set
-            {
-                dBObject = value;
-            }
-        }
-        private List<Autodesk.Gis.Map.Utilities.MapValue> values;
-        public List<Autodesk.Gis.Map.Utilities.MapValue> Values
-        {
-            get
-            {
-                return values;
-            }
-            private set
-            {
-                values = value;
-            }
-        }
+        public DBObject DbObject { get; private set; }
 
-        private ODTable odTable;
-        public ODTable ODTable
-        {
-            get
-            {
-                return odTable;
-            }
-            private set
-            {
-                odTable = value;
-            }
-        }
+        public List<MapValue> Values { get; private set; }
 
-        public ODRecord(DBObject dbObject)
+        //public OdTable OdTable { get; private set; }
+
+        public OdRecord(DBObject dbObject)
         {
             if (dbObject == null)
                 throw new ArgumentNullException();
 
-            this.dBObject = dbObject;
-            this.values = new List<Autodesk.Gis.Map.Utilities.MapValue>();
+            DbObject = dbObject;
+            Values = new List<MapValue>();
         }
     }
 }
