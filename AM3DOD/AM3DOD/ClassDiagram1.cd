@@ -3,10 +3,31 @@
   <Class Name="AM3DOD.MapObjectData">
     <Position X="3.25" Y="0.5" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>ACAAAAAAAAAAIAgJBAAACICAAAoAEAACAAAAAAAAAAA=</HashCode>
+      <HashCode>ACAAAAAAAEAAIAgJBCAACICAAAAAEAACAAAAAAAAAAA=</HashCode>
       <FileName>MapObjectData.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AM3DOD.OdFieldDefinition">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIgAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ODFieldDefinition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AM3DOD.OdRecord">
+    <Position X="6.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>ODRecord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AM3DOD.OdTable">
+    <Position X="8" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAEQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ODTable.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Interface Name="AM3DOD.IMapObjectData">
     <Position X="0.5" Y="0.5" Width="2.5" />
