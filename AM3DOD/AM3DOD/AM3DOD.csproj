@@ -33,12 +33,15 @@
   <ItemGroup>
     <Reference Include="acdbmgd">
       <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\AutoCAD Map 3D 2012\acdbmgd.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="acmgd">
       <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\AutoCAD Map 3D 2012\acmgd.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ManagedMapApi">
       <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\AutoCAD Map 3D 2012\ManagedMapApi.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
