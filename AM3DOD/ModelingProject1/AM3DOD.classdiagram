@@ -1,19 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="b747a641-ff31-42f4-8f2a-a4d30439a6ae" name="UMLClassDiagram1" linkedPackageId="e2d977f8-ba51-4a1f-9a7e-1fe7eff2a2bf" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
-  <profileInstances>
-    <packageHasProfileInstances Id="73c5a666-0ea2-40b8-ae6d-2d998c2c2532">
-      <profileInstance Id="c03c3bca-8fc8-45bd-a110-a04b311cc221" name="StandardProfileL2">
-        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
-      </profileInstance>
-      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
-    </packageHasProfileInstances>
-    <packageHasProfileInstances Id="cd86fc86-8d78-45f6-8044-0ddd0fe923dd">
-      <profileInstance Id="f5cfe16a-1768-4892-aee4-a7e716a0cbcc" name="StandardProfileL3">
-        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
-      </profileInstance>
-      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
-    </packageHasProfileInstances>
-  </profileInstances>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="b747a641-ff31-42f4-8f2a-a4d30439a6ae" name="AM3DOD" linkedPackageId="81ed0477-18e2-47e3-8371-9bdd81d9e097" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
   <packagedElements>
     <logicalClassDesignerModelHasPackages>
       <package Id="694a10c8-eb8c-4a3c-8955-0dc01d129978" name="AM3DOD">
@@ -79,12 +65,32 @@
               <ownedAttributesInternal>
                 <property Id="a8872149-6ca1-48f8-8d8e-cba468f52499" name="Name" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
                   <elementDefinition Id="622aab06-b3b2-4792-a4f3-3421b1f147b3" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="c294d2c4-5fcb-420b-9e27-fba89796c7f6" LastKnownName="String" />
+                  </type_NamedElement>
                 </property>
                 <property Id="6cff7c39-c1f7-485f-ab39-90e8c4952d43" name="FieldDefinitions" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <description>List of ODFieldDefinitions</description>
+                  <lowerValueInternal>
+                    <literalString Id="3986ce0e-3970-4594-9f3b-0c9635729c3c" name="Lower" value="1">
+                      <elementDefinition Id="73054252-d874-4326-97ba-be8c99d0eaf2" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="3797b8bf-5909-4829-b7be-7c875021af5d" name="Upper" value="*">
+                      <elementDefinition Id="4e96bab5-f5f4-402a-bea0-57d44c4b3f6f" />
+                    </literalString>
+                  </upperValueInternal>
                   <elementDefinition Id="784b370a-f9e5-400e-a25f-ebdde6bda8d0" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="422ee244-9441-454d-ab3a-7c6f5bea78be" LastKnownName="ODFieldDefinition" />
+                  </type_NamedElement>
                 </property>
                 <property Id="403b66fc-3de8-4590-8eb8-d5cb8cc5fa45" name="Description" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
                   <elementDefinition Id="95f4ecda-53b2-42dd-804e-d9d2d8f0aebf" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="44dd913b-6685-43fe-af95-fd88527cfc0d" LastKnownName="String" />
+                  </type_NamedElement>
                 </property>
               </ownedAttributesInternal>
               <ownedOperationsInternal>
@@ -100,12 +106,18 @@
               <ownedAttributesInternal>
                 <property Id="122a6b6b-09b6-4f66-b71a-6e5cc664b08a" name="Name" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
                   <elementDefinition Id="6843fb52-5b92-4b9d-b5d3-ed2743503f88" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="3d6f9f6d-07a5-4178-a8f6-e6c074e11033" LastKnownName="String" />
+                  </type_NamedElement>
                 </property>
                 <property Id="86582785-e244-4d69-9b9c-ee65d0aae5f2" name="DataType" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
                   <elementDefinition Id="dba500ab-0fd5-417c-b9e9-683d399205ae" />
                 </property>
                 <property Id="fdc666c6-123c-4876-926d-8108c6d329e7" name="Description" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
                   <elementDefinition Id="c00c075b-94a5-4660-a3c9-6390845b918c" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="507ab335-6e1e-4e9a-98c9-c25425da505c" LastKnownName="String" />
+                  </type_NamedElement>
                 </property>
               </ownedAttributesInternal>
               <ownedOperationsInternal>
@@ -121,9 +133,6 @@
               <ownedAttributesInternal>
                 <property Id="cde81a3d-8c42-48cd-8f7f-aa781834a727" name="DBObject" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
                   <elementDefinition Id="ac669bd5-f44b-4b79-8e5d-6a9b709b6055" />
-                </property>
-                <property Id="df3a25ab-6e8a-4a58-9890-2caafcde4d6d" name="ODTable" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-                  <elementDefinition Id="e3649ac9-ab2c-4295-9f3a-1efd2faa5222" />
                 </property>
                 <property Id="b2707117-66c9-440c-82ba-bfed153525a7" name="Values" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
                   <elementDefinition Id="ac7afd78-041e-421d-8c90-9d70a88ad00c" />
@@ -196,8 +205,50 @@
         </packagedElements>
       </package>
     </logicalClassDesignerModelHasPackages>
+    <packageHasNamedElement>
+      <referencedType Id="44dd913b-6685-43fe-af95-fd88527cfc0d" name="String" isAbstract="false" isLeaf="false" cachedFullName="String">
+        <elementDefinition Id="59259974-6d55-42c6-b7bd-763d77ac8ef9" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="c294d2c4-5fcb-420b-9e27-fba89796c7f6" name="String" isAbstract="false" isLeaf="false" cachedFullName="String">
+        <elementDefinition Id="59259974-6d55-42c6-b7bd-763d77ac8ef9" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="507ab335-6e1e-4e9a-98c9-c25425da505c" name="String" isAbstract="false" isLeaf="false" cachedFullName="String">
+        <elementDefinition Id="59259974-6d55-42c6-b7bd-763d77ac8ef9" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="3d6f9f6d-07a5-4178-a8f6-e6c074e11033" name="String" isAbstract="false" isLeaf="false" cachedFullName="String">
+        <elementDefinition Id="59259974-6d55-42c6-b7bd-763d77ac8ef9" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="422ee244-9441-454d-ab3a-7c6f5bea78be" name="ODFieldDefinition" isAbstract="false" isLeaf="false" cachedFullName="ModelingProject1::AM3DOD::ODFieldDefinition">
+        <elementDefinition Id="71e4910e-74d1-458a-bf45-c0b21cf58e5b" />
+      </referencedType>
+    </packageHasNamedElement>
   </packagedElements>
   <package Id="e2d977f8-ba51-4a1f-9a7e-1fe7eff2a2bf" name="ModelingProject1">
     <elementDefinition Id="f3eb637b-1601-41b0-8e3f-b5f5e3742e53" />
+    <profileInstances>
+      <packageHasProfileInstances Id="73c5a666-0ea2-40b8-ae6d-2d998c2c2532">
+        <profileInstance Id="c03c3bca-8fc8-45bd-a110-a04b311cc221" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="cd86fc86-8d78-45f6-8044-0ddd0fe923dd">
+        <profileInstance Id="f5cfe16a-1768-4892-aee4-a7e716a0cbcc" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
+  </package>
+  <package Id="81ed0477-18e2-47e3-8371-9bdd81d9e097" name="AM3DOD">
+    <elementDefinition Id="39e435f5-b020-4455-8d26-d4f6e0fa8d64" />
   </package>
 </logicalClassDesignerModel>
